@@ -1,0 +1,12 @@
+{
+  "name": "tugas2_praktikum_ppl",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "repository": "git@github.com:glennhkm/Tugas2_Praktikum_PPL.git",
+  "author": "glennhkm <glenn@mhs.usk.ac.id>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node --no-warnings index.js"
+  }
+}

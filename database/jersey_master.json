@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "Nama": "Jersey Timnas Indonesia 2025 Home - Player Issue (Short Sleeve)",
+    "Harga": 1200000,
+    "Stok": 0,
+    "Kit Type": "Home",
+    "Grade": "Player Issue"
+  },
+  {
+    "id": 2,
+    "Nama": "Jersey Timnas Indonesia 2025 Home - Player Issue (Long Sleeve)",
+    "Harga": 1500000,
+    "Stok": 1,
+    "Kit Type": "Home",
+    "Grade": "Player Issue"
+  },
+  {
+    "id": 3,
+    "Nama": "Jersey Timnas Indonesia 2025 Away - Player Issue (Short Sleeve)",
+    "Harga": 1200000,
+    "Stok": 3,
+    "Kit Type": "Away",
+    "Grade": "Player Issue"
+  },
+  {
+    "id": 4,
+    "Nama": "Jersey Timnas Indonesia 2025 Away - Player Issue (Long Sleeve)",
+    "Harga": 1500000,
+    "Stok": 0,
+    "Kit Type": "Away",
+    "Grade": "Player Issue"
+  },
+  {
+    "id": 5,
+    "Nama": "Jersey Timnas Indonesia 2025 Home - Replica (Short Sleeve)",
+    "Harga": 600000,
+    "Stok": 2,
+    "Kit Type": "Home",
+    "Grade": "Replica"
+  },
+  {
+    "id": 6,
+    "Nama": "Jersey Timnas Indonesia 2025 Home - Replica (Long Sleeve)",
+    "Harga": 800000,
+    "Stok": 2,
+    "Kit Type": "Home",
+    "Grade": "Replica"
+  },
+  {
+    "id": 7,
+    "Nama": "Jersey Timnas Indonesia 2025 Away - Replica (Short Sleeve)",
+    "Harga": 600000,
+    "Stok": 3,
+    "Kit Type": "Away",
+    "Grade": "Replica"
+  },
+  {
+    "id": 8,
+    "Nama": "Jersey Timnas Indonesia 2025 Away - Replica (Long Sleeve)",
+    "Harga": 800000,
+    "Stok": 1,
+    "Kit Type": "Away",
+    "Grade": "Replica"
+  },
+  {
+    "id": 9,
+    "Nama": "Jersey Timnas Indonesia 2025 Home - Fans (Short Sleeve)",
+    "Harga": 200000,
+    "Stok": 8,
+    "Kit Type": "Home",
+    "Grade": "Fans"
+  },
+  {
+    "id": 10,
+    "Nama": "Jersey Timnas Indonesia 2025 Home - Fans (Long Sleeve)",
+    "Harga": 400000,
+    "Stok": 2,
+    "Kit Type": "Home",
+    "Grade": "Fans"
+  },
+  {
+    "id": 11,
+    "Nama": "Jersey Timnas Indonesia 2025 Away - Fans (Short Sleeve)",
+    "Harga": 200000,
+    "Stok": 11,
+    "Kit Type": "Away",
+    "Grade": "Fans"
+  },
+  {
+    "id": 12,
+    "Nama": "Jersey Timnas Indonesia 2025 Away - Fans (Long Sleeve)",
+    "Harga": 400000,
+    "Stok": 9,
+    "Kit Type": "Away",
+    "Grade": "Fans"
+  }
+]
