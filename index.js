@@ -48,14 +48,19 @@ const menu = () => {
 
 const showJerseys = () => {
   console.log("\nErspo Daftar Jersey");
-  console.table(allJerseys.map(jersey => ({
-    id: jersey.id,
-    Nama: jersey.Nama,
-    Harga: new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(jersey.Harga),
-    Stok: jersey.Stok,
-    "Kit Type": jersey["Kit Type"],
-    Grade: jersey.Grade
-  })));
+  console.table(
+    allJerseys.map((jersey) => ({
+      id: jersey.id,
+      Nama: jersey.Nama,
+      Harga: new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      }).format(jersey.Harga),
+      Stok: jersey.Stok,
+      "Kit Type": jersey["Kit Type"],
+      Grade: jersey.Grade,
+    }))
+  );
   menu();
 };
 
@@ -109,15 +114,19 @@ const orderJersey = () => {
       );
 
       console.log("\nErspo Daftar Jersey");
-      console.table(jerseys.map(jersey => ({
-        id: jersey.id,
-        Nama: jersey.Nama,
-        Harga: new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(jersey.Harga),
-        Stok: jersey.Stok,
-        "Kit Type": jersey["Kit Type"],
-        Grade: jersey.Grade
-      })));
-      
+      console.table(
+        jerseys.map((jersey) => ({
+          id: jersey.id,
+          Nama: jersey.Nama,
+          Harga: new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+          }).format(jersey.Harga),
+          Stok: jersey.Stok,
+          "Kit Type": jersey["Kit Type"],
+          Grade: jersey.Grade,
+        }))
+      );
 
       if (jerseys.length === 0) {
         console.log("Tidak ada jersey tersedia untuk pilihan tersebut.");
@@ -176,6 +185,133 @@ const orderJersey = () => {
         });
       });
     });
+  });
+};
+
+const showOrders = () => {
+  const orders = JSON.parse(
+    fs.readFileSync("./database/pemesanan.json", "utf8")
+  );
+  console.log("\nErspo Daftar Order");
+  console.table(
+    orders.map((order) => ({
+      id: order.id,
+      id_jersey: order.jersey_id,
+      Kuantitas: order.Kuantitas,
+      "Total Harga": new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      }).format(order["Total Harga"]),
+    }))
+  );
+  menu();
+};
+
+const editOrder = () => {
+  const orders = JSON.parse(
+    fs.readFileSync("./database/pemesanan.json", "utf8")
+  );
+  console.log("\nErspo Daftar Order");
+  console.table(
+    orders.map((order) => ({
+      id: order.id,
+      id_jersey: order.jersey_id,
+      Kuantitas: order.Kuantitas,
+      "Total Harga": new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      }).format(order["Total Harga"]),
+    }))
+  );
+
+  rl.question("\nPilih Id Order: ", (answer) => {
+    const selectedOrder = orders.find((order) => order.id === +answer);
+    if (!selectedOrder) {
+      console.log("\nOrder tidak ditemukan");
+      editOrder();
+      return;
+    }
+
+    const kuantitas = selectedOrder.Kuantitas;
+
+    rl.question("Jumlah Kuantitas: ", (qty) => {
+      const selectedJersey = allJerseys.find(
+        (jersey) => jersey.id === selectedOrder.jersey_id
+      );
+
+      if (selectedJersey.Stok + selectedOrder.Kuantitas < +qty) {
+        console.log("\nStok tidak cukup");
+        editOrder();
+        return;
+      }
+
+      selectedOrder.Kuantitas = +qty;
+      selectedOrder["Total Harga"] = selectedJersey.Harga * +qty;
+
+      fs.writeFileSync(
+        "./database/pemesanan.json",
+        JSON.stringify(orders, null, 2)
+      );
+
+      fs.writeFileSync(
+        "./database/jersey_master.json",
+        JSON.stringify(
+          allJerseys.map((jersey) => {
+            if (jersey.id === selectedJersey.id) {
+              jersey.Stok -= +qty;
+              jersey.Stok += kuantitas;
+            }
+            return jersey;
+          }),
+          null,
+          2
+        )
+      );
+
+      console.log("\nOrder berhasil diubah!");
+      menu();
+    });
+  });
+};
+
+const deleteOrder = () => {
+  const orders = JSON.parse(
+    fs.readFileSync("./database/pemesanan.json", "utf8")
+  );
+  console.log("\nErspo Daftar Order");
+  console.table(
+    orders.map((order) => ({
+      id: order.id,
+      id_jersey: order.jersey_id,
+      Kuantitas: order.Kuantitas,
+      "Total Harga": new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      }).format(order["Total Harga"]),
+    }))
+  );
+
+  rl.question("\nPilih Id Order: ", (answer) => {
+    const selectedOrder = orders.find((order) => order.id === +answer);
+    if (!selectedOrder) {
+      console.log("\nOrder tidak ditemukan");
+      deleteOrder();
+      return;
+    }
+
+    const selectedJersey = allJerseys.find(
+      (jersey) => jersey.id === selectedOrder.jersey_id
+    );
+
+    selectedJersey.Stok += selectedOrder.Kuantitas;
+
+    fs.writeFileSync(
+      "./database/pemesanan.json",
+      JSON.stringify(orders, null, 2)
+    );
+
+    console.log("\nOrder berhasil dihapus!");
+    menu();
   });
 };
 
