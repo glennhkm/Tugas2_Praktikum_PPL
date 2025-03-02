@@ -279,17 +279,7 @@ const deleteOrder = () => {
     fs.readFileSync("./database/pemesanan.json", "utf8")
   );
   console.log("\nErspo Daftar Order");
-  console.table(
-    orders.map((order) => ({
-      id: order.id,
-      id_jersey: order.jersey_id,
-      Kuantitas: order.Kuantitas,
-      "Total Harga": new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-      }).format(order["Total Harga"]),
-    }))
-  );
+  console.table(orders);
 
   rl.question("\nPilih Id Order: ", (answer) => {
     const selectedOrder = orders.find((order) => order.id === +answer);
@@ -303,11 +293,24 @@ const deleteOrder = () => {
       (jersey) => jersey.id === selectedOrder.jersey_id
     );
 
-    selectedJersey.Stok += selectedOrder.Kuantitas;
+    fs.writeFileSync(
+      "./database/jersey_master.json",
+      JSON.stringify(
+        allJerseys.map((jersey) => {
+          if (jersey.id === selectedJersey.id) {
+            jersey.Stok += selectedOrder.Kuantitas;
+          }
+          return jersey;
+        }),
+        null,
+        2
+      )
+    );
 
+    const newOrders = orders.filter((order) => order.id !== +answer);
     fs.writeFileSync(
       "./database/pemesanan.json",
-      JSON.stringify(orders, null, 2)
+      JSON.stringify(newOrders, null, 2)
     );
 
     console.log("\nOrder berhasil dihapus!");
