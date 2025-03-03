@@ -298,7 +298,7 @@ const deleteOrder = () => {
     menu();
     return;
   }
-  
+
   console.log("\nErspo Daftar Order");
   console.table(orders);
 
