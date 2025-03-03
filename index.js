@@ -192,6 +192,13 @@ const showOrders = () => {
   const orders = JSON.parse(
     fs.readFileSync("./database/pemesanan.json", "utf8")
   );
+
+  if (orders.length === 0) {
+    console.log("\nBelum ada order");
+    menu();
+    return;
+  }
+
   console.log("\nErspo Daftar Order");
   console.table(
     orders.map((order) => ({
@@ -211,6 +218,13 @@ const editOrder = () => {
   const orders = JSON.parse(
     fs.readFileSync("./database/pemesanan.json", "utf8")
   );
+
+  if (orders.length === 0) {
+    console.log("\nBelum ada order");
+    menu();
+    return;
+  }
+  
   console.log("\nErspo Daftar Order");
   console.table(
     orders.map((order) => ({
@@ -278,6 +292,13 @@ const deleteOrder = () => {
   const orders = JSON.parse(
     fs.readFileSync("./database/pemesanan.json", "utf8")
   );
+
+  if (orders.length === 0) {
+    console.log("\nBelum ada order");
+    menu();
+    return;
+  }
+
   console.log("\nErspo Daftar Order");
   console.table(orders);
 
